@@ -1,0 +1,18 @@
+# Cached Files
+__pycache__
+.coverage
+.pytest_cache/
+
+# Pycharm Settings
+.idea
+
+# Script to Set Env vars
+env.bat
+
+# Python virtual Environment
+venv/
+venv1/
+
+# Vendored packages for application
+vendor/
+

@@ -1,0 +1,9 @@
+[submodule "TakeOnPersistenceLayer"]
+	path = TakeOnPersistenceLayer
+	url = http://np2rvlapxx507/Collection/TakeOnPersistenceLayer.git
+[submodule "TakeOnBusinessLayer"]
+	path = TakeOnBusinessLayer
+	url = http://np2rvlapxx507/Collection/TakeOnBusinessLayer.git
+[submodule "TakeOnUI"]
+	path = TakeOnUI
+	url = http://np2rvlapxx507/Collection/TakeOnUI.git

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock title %}
+
+
+
+{% block page_header %}
+	<h1 class="jupiter main_heading">Dashboard</h1>
+	<h2 class="neptune sub_heading">Collection Team</h2>
+{% endblock page_header %}
+
+
+{% block content %}
+	<section>
+		<div class="search_bar">
+			<div class="wrapper">
+				<div class="group">
+
+					<form id="form-sign-in" action="dashboard" class="form" method="post">
+						<div class="col-5">
+							<div class="field u-mb-s">
+
+								{{ form.csrf_token }}
+    							{{ form.first_name.label(class="label") }}
+								{{ form.first_name(class="input input--text input-type__input sbr-search-input input-grey-color") }}
+
+								{% if form.first_name.errors %}
+								<ul>
+									{% for error_message in form.first_name.errors %}
+									<li>{{ error_message }}</li>
+									{% endfor %}
+								</ul>
+								{% endif %}
+
+							</div>
+						</div>
+
+						<div class="col-3">
+							<button class="btn btn--primary venus three-col-button" type="submit">Search</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+
+		<div>
+			<div class="wrapper">
+				<div class="group">
+					<div class="col-8">
+						<h2 class="saturn sml-margin buttom_10_extra_space">Respondents</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div>
+			<div class="wrapper">
+
+				<div class="group">
+					<div class="col-12">
+
+						<table class="table table__dense">
+							<thead class="table--head">
+							<!--Render each column name -->
+							{% for column in header %}
+								<th class="table--header--cell"> {{ column }} </th>
+							{% endfor %}
+							</thead>
+							<tbody>
+								<!-- for each record, render each data value -->
+								{% for record in records %}
+								<tr class="table--row">
+									<!-- Use .values() method to get values from each row dict -->
+									{% for element in record.values() %}
+									<td class="table--cell"> {{ element }} </td>
+									{% endfor %}
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+{% endblock content %}

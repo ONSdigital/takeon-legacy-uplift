@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-gb" dir="ltr" class="no-js">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{% block title %}{% endblock title %}</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link rel="apple-touch-icon" sizes="180x180" href="static/img/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="static/img/favicons/favicon-32x32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="static/img/favicons/favicon-16x16.png" sizes="16x16">
+        <link rel="manifest" href="static/img/favicons/manifest.json">
+        <link rel="mask-icon" href="static/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="theme-color" content="#ffffff">
+
+        {% block css %}
+            <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.css'>
+            <link rel="stylesheet" href="https://cdn.ons.gov.uk/sdc/322aece/css/styles.css">
+            <link rel="stylesheet" href="static/css/legacy-main.css" media="all">
+        {% endblock css %}
+
+        {% block head_js %}
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="static/js/industry-range.js"></script>
+            <script src="https://cdn.ons.gov.uk/sdc/322aece/scripts/bundle.min.js"></script>
+        {% endblock head_js %}
+
+    {% endblock head %}
+</head>
+
+<body>
+
+	<header class="page__header">
+
+		<!--Navigation Bar -->
+
+		<div class="logo_container">
+			<div class="wrapper">
+				<div class="group">
+					<div class="col-7">
+						<div class="logo_header">
+							<a href="/">
+								<img src="static/img/logo.svg" alt="Office for National Statistics" class="logo__img" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Page Title -->
+
+		<div class="page_title">
+			<div class="wrapper">
+				<div class="group">
+					<div class="col-12">
+						{% block page_header %}
+						{% endblock page_header %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+    {% block content %}
+    {% endblock content %}
+
+	<footer class="page__footer">
+		<div class="wrapper">
+			<div class="group">
+			</div>
+		</div>
+	</footer>
+
+</body>
+
+</html>

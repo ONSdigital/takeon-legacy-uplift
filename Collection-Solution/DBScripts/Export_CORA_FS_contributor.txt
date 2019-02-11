@@ -1,0 +1,145 @@
+/* Connect to the appropriate Common Software/CORA Database */
+/* TODO: Enhancement - add to python script which manages Ingres connection */
+
+Drop Table session.tt_period_contributor;
+Declare Global Temporary Table session.tt_period_contributor As
+Select 	cp.period,
+		cp.reference,
+		i.inquiry_code,
+		cp.form,
+		cp.sic92,
+		cp.selection_to,
+		cp.selection_emp,
+		cp.enterprise,
+		cp.sub_date,
+		cp.receipt_mkr,
+		cp.error_mkr,
+		cp.key_responder,
+		cp.response_type,
+		cp.seltype,
+		cp.legalstatus,
+		cp.inclexcl,
+		cp.receipt_date,
+		cp.go_region,
+		cp.currency,
+		c.checkletter,
+		squeeze(c.name1) + squeeze(c.name2) + squeeze(c.name3) As Name,
+		squeeze(c.address1) + squeeze(c.address2) + squeeze(c.address3) + squeeze(c.address4) + squeeze(c.address5) As Address,
+		c.post_code,
+		squeeze(c.contact_name1 + c.contact_name2) As contact_name,
+		c.tel_no,
+		c.fax,
+		c.region,
+		c.vat_reference,
+		c.birthdate,
+		c.email
+From    contributor_period cp
+        Join    contributor c
+            On  cp.reference = c.reference,
+        inquiry i
+ON COMMIT PRESERVE ROWS WITH NORECOVERY
+
+	
+Copy Table session.tt_period_contributor
+(	
+	period  = text(0)'|',
+	reference  = text(0)'|',
+	inquiry_code = text(0)'|',
+	form = text(0)'|',
+	sic92 = text(0)'|',
+	selection_to = text(0)'|',
+	selection_emp = text(0)'|',
+	enterprise = text(0)'|',
+	sub_date = text(0)'|',
+	receipt_mkr = text(0)'|',
+	error_mkr = text(0)'|',
+	key_responder = text(0)'|',
+	response_type = text(0)'|',
+	seltype = text(0)'|',
+	legalstatus = text(0)'|',
+	inclexcl = text(0)'|',
+	receipt_date = text(0)'|',
+	go_region = text(0)'|',
+	currency = text(0)'|',
+	checkletter = text(0)'|',
+	name = text(0)'|',
+	address = text(0)'|',
+	post_code = text(0)'|',
+	contact_name = text(0)'|',
+	tel_no = text(0)'|',
+	fax = text(0)'|',
+	region = text(0)'|',
+	vat_reference = text(0)'|',
+	birthdate = text(0)'|',
+	email = text(0)nl
+)
+Into 'D:\inq_cs_contributor.txt.out'
+
+
+/* Connect to the appropriate Common Software/CORA Database */
+/* TODO: Enhancement - add to python script which manages Ingres connection */
+
+/* Run against FSS so far */
+
+Copy Table period_contributor
+(
+	Period_Contributor_Id = text(0)'|',
+	Inquiry_Id = text(0)'|',
+	Inquiry_IDBR_Code = text(0)'|',
+	Form_Version_Id = text(0)'|',
+	Period = text(0)'|',
+	Period_Year = text(0)'|',
+	Period_Month = text(0)'|',
+	RU_Ref = text(0)'|',
+	RU_Check_Letter = text(0)'|',
+	EntRef = text(0)'|',
+	WowEntRef = text(0)'|',
+	Status = text(0)'|',
+	Employee_Count = text(0)'|',
+	Current_SIC	= text(0)'|',
+	Previous_SIC = text(0)'|',
+	Contributor_Region = text(0)'|',
+	RU_Name = text(0)'|',
+	Address_Line1 = text(0)'|',
+	Address_Line2 = text(0)'|',
+	Address_Line3 = text(0)'|',
+	Address_Line4 = text(0)'|',
+	Address_Line5 = text(0)'|',
+	Post_Code = text(0)'|',
+	Contact = text(0)'|',
+	Telephone = text(0)'|',
+	Email_address = text(0)'|',
+	Form_Currency = text(0)'|',
+	Contributor_Source = text(0)'|',
+	Data_Source = text(0)'|',
+	Turnover = text(0)'|',
+	Manager_Checked = text(0)'|',
+	Legal_Status = text(0)'|',
+	Receipt_Date = text(0)'|',
+	First_Time_Failures = text(0)'|',
+	Cell_Number	= text(0)'|',
+	Cell_Selection = text(0)'|',
+	Form_Value = text(0)'|',
+	Form_Type = text(0)'|',
+	Newly_Selected = text(0)'|',
+	IDBR_Employees = text(0)'|',
+	IDBR_FroEmployees = text(0)'|',
+	IDBR_Employment = text(0)'|',
+	IDBR_FroEmployment = text(0)'|',
+	IDBR_FTEmpment = text(0)'|',
+	IDBR_FroFTEmpment = text(0)'|',
+	IDBR_Turnover = text(0)'|',
+	IDBR_FroTurnover = text(0)'|',
+	IDBR_RuSic_Current = text(0)'|',
+	IDBR_FroSic_Current = text(0)'|',
+	IDBR_RuSic_Previous = text(0)'|',
+	IDBR_FroSic_Previous = text(0)'|',
+	Locked_By = text(0)'|',
+	Locked_Date = text(0)'|',
+	Non_Responded_Periods = text(0)'|',
+	Created_By = text(0)'|',
+	Created_Date = text(0)'|',
+	Last_Updated_By	= text(0)'|',
+	Last_Updated_Date = text(0)nl
+)
+Into 'D:\inq_cora_contributor.txt.out'
