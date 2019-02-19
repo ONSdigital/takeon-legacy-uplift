@@ -171,13 +171,13 @@ def insertContributorsToDb(sqlParameters = ''):
             "ReportingUnitMarker,Region,BirthDate,EnterpriseName,ReferenceName,ReferenceAddress,ReferencePostcode," \
             "TradingStyle,Contact,Telephone,Fax,SelectionType,InclusionExclusion,CreatedBy,CreatedDate) " \
             "Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-    connection = SimpleMsSqlConnection(ServerName=os.getenv('DATASOURCE_SERVER'), Database='CollectionDev')
+    connection = SimpleMsSqlConnection(ServerName=os.getenv('HOSTNAME'), Database=os.getenv('CONTRIBUTOR_DB_NAME'))
     connection.runSQL(query, sqlParameters)
 
 def main():
     sqlParameters = generateInsertSqlParameters(rowsToInsert=100000, startReference='49900000001', survey='006',
                                                 period='201512')
-    creationTime = round(timeit.default_timer() - startTime,2)
+    creationTime = round(timeit.default_timer() - startTime, 2)
     insertContributorsToDb(sqlParameters)
 
 if __name__ == "__main__":
