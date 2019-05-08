@@ -1,0 +1,4 @@
+.git/
+.terraform/
+*tfstate*
+config.tf

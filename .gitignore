@@ -24,3 +24,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+.git/
+.terraform/
+*tfstate*
+config.tf
