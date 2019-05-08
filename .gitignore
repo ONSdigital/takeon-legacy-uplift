@@ -28,3 +28,4 @@
 .terraform/
 *tfstate*
 config.tf
+*.swp
