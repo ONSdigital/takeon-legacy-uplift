@@ -33,7 +33,7 @@ resource "aws_iam_role_policy_attachment" "Take-On-Cluster-AmazonEKSServicePolic
 resource "aws_security_group" "Take-On-EKS-SG" {
   name        = "Take-On-EKS-SG"
   description = "Cluster communication with worker nodes"
-  vpc_id      = "${aws_vpc.default.id}"
+  vpc_id      = "${aws_vpc.Take-On-VPC.id}"
 
   egress {
     from_port   = 0

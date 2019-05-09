@@ -31,4 +31,3 @@ variable "takeon_private_subnet_backup"{
 variable "cluster-name" {
   default = "Take-On-EKS"
 }
-
