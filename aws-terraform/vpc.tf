@@ -3,6 +3,7 @@ resource "aws_vpc" "default"{
 	enable_dns_hostnames = true
 	tags {
 		Name = "take-on-vpc"
+		Team = "TakeOn"
 	}
 }
 
@@ -13,6 +14,7 @@ resource "aws_subnet" "public-subnet"{
 	
 	tags{
 		Name = "Take-On-Public"
+		Team = "TakeOn"
 	}
 }
 
@@ -23,6 +25,7 @@ resource "aws_subnet" "private-subnet"{
 	
 	tags{
 		Name = "Take-On-Private"
+		Team = "TakeOn"
 	}
 }
 
@@ -33,6 +36,7 @@ resource "aws_subnet" "private-subnet-backup"{
 	
 	tags{
 		Name = "Take-On-Private-2a"
+		Team = "TakeOn"
 	}
 }
 
@@ -41,17 +45,6 @@ resource "aws_internet_gateway" "default"{
 	
 	tags{
 		Name = "Take-On-Gateway"
+		Team = "TakeOn"
 	}
 }
-
-resource "aws_vpn_gateway" "Take-On-VPN-Gateway" {
-  vpc_id = "${aws_vpc.default.id}"
-  tags{
-	  Name = "Take-On-VPN-Gateway"
-  } 
-}
-
-resource "aws_customer_gateway" "Take-On-Customer-Gateway" {
-  
-}
-

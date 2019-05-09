@@ -1,11 +1,11 @@
-# resource "aws_eks_cluster" "takeon_eks"{
-# 	name = "Take-On-eks"
-# 	role_arn = "${aws_iam_user.test.arn}"
-# 	vpc_config{ 
-# 		subnet_ids = ["$aws_subnet.private-subnet.id"]
-# 	}
+resource "aws_eks_cluster" "takeon_eks"{
+	name = "Take-On-eks"
+	role_arn = "${aws_iam_user.test.arn}"
+	vpc_config{ 
+		subnet_ids = ["$aws_subnet.private-subnet.id"]
+	}
 
-# }
+}
 
 resource "aws_eks_cluster" "Take-On-EKS" {
   name            = "${var.cluster-name}"

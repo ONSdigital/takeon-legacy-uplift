@@ -15,6 +15,9 @@ resource "aws_iam_role" "Take-On-Service" {
   ]
 }
 POLICY
+    tags = {
+    Team = "TakeOn"
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "Take-On-Cluster-AmazonEKSClusterPolicy" {
@@ -41,5 +44,6 @@ resource "aws_security_group" "Take-On-EKS-SG" {
 
   tags = {
     Name = "Take-On-EKS-SG"
+    Team = "TakeOn"
   }
 }
