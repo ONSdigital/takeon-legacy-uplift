@@ -2,7 +2,7 @@ resource "aws_vpn_gateway" "Take-On-VPN-Gateway" {
   vpc_id = "${aws_vpc.Take-On-VPC.id}"
   tags{
 	  Name = "Take-On-VPN-Gateway"
-	  Team = "TakeOn"
+	  Team = "${var.TeamName}"
   } 
 }
 
@@ -20,7 +20,7 @@ resource "aws_ec2_client_vpn_endpoint" "main-endpoint" {
     root_certificate_chain_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/8690f3d0-fef4-410a-8fae-05068b043353"
   }
 	tags = {
-    	Team = "TakeOn"
+    	Team = "${var.TeamName}"
 		Name = "Take-On-VPN"
   }
 }

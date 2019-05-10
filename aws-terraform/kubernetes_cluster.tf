@@ -12,3 +12,19 @@ resource "aws_eks_cluster" "Take-On-EKS" {
     "aws_iam_role_policy_attachment.Take-On-Cluster-AmazonEKSServicePolicy",
   ]
 }
+
+resource "aws_launch_configuration" "EKS-Config"{
+    associate_public_ip_address = false
+    instance_type = "${var.EKS_instance_type}"
+    image_id = "${data.aws_ami.ubuntu.id}"
+
+    lifecycle{
+        create_before_destroy = true
+    }
+}
+
+resource "aws_autoscaling_group" "scaling_test" {
+  launch_configuration = "${aws_launch_configuration.EKS-Config.name}"
+  min_size = 0
+  max_size = 3
+}

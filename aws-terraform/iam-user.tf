@@ -16,7 +16,7 @@ resource "aws_iam_role" "Take-On-Service" {
 }
 POLICY
     tags = {
-    Team = "TakeOn"
+    Team = "${var.TeamName}"
   }
 }
 

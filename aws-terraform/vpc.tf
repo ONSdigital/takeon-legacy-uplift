@@ -3,7 +3,7 @@ resource "aws_vpc" "Take-On-VPC"{
 	enable_dns_hostnames = true
 	tags {
 		Name = "Take-On-VPC"
-		Team = "TakeOn"
+		Team = "${var.TeamName}"
 	}
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "public-subnet"{
 	
 	tags{
 		Name = "Take-On-Public"
-		Team = "TakeOn"
+		Team = "${var.TeamName}"
 	}
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "private-subnet"{
 	
 	tags{
 		Name = "Take-On-Private"
-		Team = "TakeOn"
+		Team = "${var.TeamName}"
 	}
 }
 
@@ -36,28 +36,25 @@ resource "aws_subnet" "private-subnet-backup"{
 	
 	tags{
 		Name = "Take-On-Private-2a"
-		Team = "TakeOn"
+		Team = "${var.TeamName}"
 	}
 }
 
-resource "aws_security_group" "Take-On-IG-SG" {
-  name = "Take-On-IG-SG"
-  description = "TakeOn security group for our internet gateway"
-  vpc_id = "${aws_vpc.Take-On-VPC.id}"
-  ingress {
-      from_port = 0
-      to_port = 0
-      protocol = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-      from_port = 0
-      to_port = 0
-      protocol = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-  } 
-  tags = {
-      Name = "Take-On-IG-SG"
-      Team = "TakeOn"
-  }
+resource "aws_route_table" "route-test" {
+	vpc_id = "${aws_vpc.Take-On-VPC.id}"
+
+	route {
+		cidr_block = "0.0.0.0/0"
+		gateway_id = "${aws_internet_gateway.TakeOn-Ig.id}"
+	}
+
+	tags {
+		Team = "${var.TeamName}"
+	}
+  
+}
+
+resource "aws_route_table_association" "route-test-associate" {
+  subnet_id = "${aws_subnet.private-subnet.id}"
+  route_table_id = "${aws_route_table.route-test.id}"
 }
