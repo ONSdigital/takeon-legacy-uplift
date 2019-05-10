@@ -1,4 +1,4 @@
-##### General AWS setup ####
+#### General AWS setup ####
 variable "aws_region"{
 	default = "eu-west-2"
 }
@@ -57,5 +57,21 @@ data "aws_ami" "ubuntu"{
   }
 
   owners = ["099720109477"] # Canonical
+}
+
+variable "master_node_min_instances"{
+	default = 1
+}
+
+variable "master_node_max_instances" {
+	default = 3
+}
+
+variable "pod_min_instances" {
+	default = 0
+}
+
+variable "pod_max_instsances" {
+	default = 3
 }
 
