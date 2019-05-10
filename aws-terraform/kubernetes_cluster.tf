@@ -25,6 +25,7 @@ resource "aws_launch_configuration" "EKS-Config"{
 
 resource "aws_autoscaling_group" "scaling_test" {
   launch_configuration = "${aws_launch_configuration.EKS-Config.name}"
+  vpc_zone_identifier = ["${aws_subnet.private-subnet.id}", "${aws_subnet.private-subnet-backup.id}"]
   min_size = 0
   max_size = 3
 }
