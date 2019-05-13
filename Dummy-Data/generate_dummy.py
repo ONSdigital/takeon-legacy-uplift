@@ -31,8 +31,6 @@ with open("univext.csv", "r") as file_in:
                 inqstop = i[21]
                 inclexcl = i[22]
 
-                del i[1]
-
                 i[1] = fake.random_uppercase_letter()
                 i[14] = entref[1:]
                 i[15] = random.randrange(2900000000, 2999999999)
@@ -43,10 +41,13 @@ with open("univext.csv", "r") as file_in:
                 i[20] = live_vat
                 i[21] = live_paye
 
+                del i[22]
+
                 i.extend((legalstatus, fake.random_uppercase_letter(), region, fake.date(pattern='%d/%m/%Y'),
                           fake.company(), fake.company_suffix(), "", fake.company(), "", "", fake.building_number(),
                           fake.street_name(), fake.city(), fake.country(), "", fake.postcode(),
                           random.choice(['Franchise', 'Sole Trader', '']), "", "", fake.name(), fake.phone_number(),
-                          fake.phone_number(), random.choice(['E', 'C', 'P']), "0004", "", random.choice(['€', '£'])))
+                          fake.phone_number(), random.choice(['E', 'C', 'P']), inclexcl, cell_no, "0004", "",
+                          random.choice(['€', '£'])))
                 writer.writerow(i)
 
