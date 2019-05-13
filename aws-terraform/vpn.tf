@@ -10,7 +10,6 @@ resource "aws_ec2_client_vpn_endpoint" "main-endpoint" {
   description = "Test endpoint"
   server_certificate_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/df9217f4-0d43-432a-a4b6-a3bcce950f2d"
   client_cidr_block = "178.0.0.0/16"
-  dns_servers = ["${var.vpn_dns}"]
 
   connection_log_options{
 	  enabled = false

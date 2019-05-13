@@ -6,4 +6,3 @@ resource "aws_internet_gateway" "TakeOn-Ig"{
 		Team = "${var.TeamName}"
 	}
 }
-
