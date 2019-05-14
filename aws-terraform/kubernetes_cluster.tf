@@ -28,8 +28,4 @@ resource "aws_autoscaling_group" "scaling_test" {
   vpc_zone_identifier = ["${aws_subnet.private-subnet.id}", "${aws_subnet.private-subnet-backup.id}"]
   min_size = "${var.master_node_min_instances}"
   max_size = "${var.master_node_max_instances}"
-  tags{
-    Name = "TakeOn-Kubernetes-AutoScale"
-    Team = "TakeOn"
-  }
 }
