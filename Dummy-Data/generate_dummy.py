@@ -28,7 +28,6 @@ with open("univext.csv", "r") as file_in:
                 region = i[18]
                 cell_no = i[19]
                 selmkr = i[20]
-                inqstop = i[21]
                 inclexcl = i[22]
 
                 i[1] = fake.random_uppercase_letter()
@@ -43,11 +42,10 @@ with open("univext.csv", "r") as file_in:
 
                 del i[22]
 
-                i.extend((legalstatus, fake.random_uppercase_letter(), region, fake.date(pattern='%d/%m/%Y'),
+                i.extend((legalstatus, "E", region, fake.date(pattern='%d/%m/%Y'),
                           fake.company(), fake.company_suffix(), "", fake.company(), "", "", fake.building_number(),
                           fake.street_name(), fake.city(), fake.country(), "", fake.postcode(),
                           random.choice(['Franchise', 'Sole Trader', '']), "", "", fake.name(), fake.phone_number(),
-                          fake.phone_number(), random.choice(['E', 'C', 'P']), inclexcl, cell_no, "0004", "",
-                          random.choice(['€', '£'])))
+                          fake.phone_number(), selmkr, inclexcl, cell_no, "0004", "*", random.choice(['E', 'S'])))
                 writer.writerow(i)
 
