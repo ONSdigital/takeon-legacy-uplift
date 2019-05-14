@@ -2,25 +2,22 @@ import csv
 import random
 from faker import Faker
 
+fake = Faker('en_GB')
 
-class generate_dummy_data():
-    def __init__(self):
-        reader = csv.reader(inputFile, delimiter=':')
-        fake = Faker('en_GB')
-
-
-    def create_univext_file(reader, file_in)
-        with open(file_in, 'w+') as file_new:
+def create_univext_file(source_file, output_file):
+    with open(source_file, "r") as file_in:
+        reader = csv.reader(file_in, delimiter=':')
+        with open(output_file, 'w+') as file_new:
             for i in reader:
                 ruref = str(random.randrange(69000000000, 69999999999))
                 string_var = ruref + ':' + ':'.join(i) + "\n"
                 string_var.replace("\"", "")
                 file_new.write(string_var)
-        return file_new
 
-
-    def create_finalsel_file(reader, file_in, file_new, fake)
-        with open(file_in, 'w+') as file_new:
+def create_finalsel_file(source_file, output_file):
+    with open(source_file, "r") as file_in:
+        reader = csv.reader(file_in, delimiter=':')
+        with open(output_file, 'w') as file_new:
             writer = csv.writer(file_new, delimiter=':', lineterminator='\n')
             for i in reader:
                 if 'N' not in i[20]:
@@ -54,6 +51,5 @@ class generate_dummy_data():
                               fake.phone_number(), selmkr, inclexcl, cell_no, "0004", "*", random.choice(['E', 'S'])))
                     writer.writerow(i)
 
-
-
-
+create_univext_file("univext019_202003.csv", "univext.csv")
+create_finalsel_file("univext.csv", "finalsel.csv")
