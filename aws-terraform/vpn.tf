@@ -8,7 +8,7 @@ resource "aws_vpn_gateway" "Take-On-VPN-Gateway" {
 
 resource "aws_ec2_client_vpn_endpoint" "main-endpoint" {
   description = "Test endpoint"
-  server_certificate_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/df9217f4-0d43-432a-a4b6-a3bcce950f2d"
+  server_certificate_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/5275f388-aefe-4dd7-bbee-8edb3a2c9e5c"
   client_cidr_block = "178.0.0.0/16"
   dns_servers = ["${var.vpn_dns}"]
 
@@ -18,7 +18,7 @@ resource "aws_ec2_client_vpn_endpoint" "main-endpoint" {
 
     authentication_options {
     type = "certificate-authentication"
-    root_certificate_chain_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/8690f3d0-fef4-410a-8fae-05068b043353"
+    root_certificate_chain_arn = "arn:aws:acm:eu-west-2:014669633018:certificate/5aed85ca-75c5-4836-9d49-f2a8f763a5ee"
   }
 	tags = {
     	Team = "${var.TeamName}"
