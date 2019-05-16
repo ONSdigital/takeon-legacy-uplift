@@ -72,6 +72,14 @@ variable "master_node_max_instances" {
 	default = 3
 }
 
+variable "worker_node_min_instances"{
+	default = 1
+}
+
+variable "worker_node_max_instances" {
+	default = 3
+}
+
 variable "pod_min_instances" {
 	default = 0
 }
