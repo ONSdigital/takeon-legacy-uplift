@@ -20,9 +20,9 @@ resource "aws_vpc" "demo" {
 resource "aws_subnet" "demo" {
   count = 2
 
-  # availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
-  cidr_block        = "10.0.1.0/24"
-  vpc_id            = "${aws_vpc.demo.id}"
+  # availability_zone = "${data.aws_availability_zones.available.names[count.index]}"s
+  cidr_block        = "${var.takeon_eks_subnet}"
+  vpc_id            = "${aws_vpc.Take-On-VPC.id}"
 
   tags = "${
     map(
@@ -33,7 +33,7 @@ resource "aws_subnet" "demo" {
 }
 
 resource "aws_route_table" "demo" {
-  vpc_id = "${aws_vpc.demo.id}"
+  vpc_id = "${aws_vpc.Take-On-VPC.id}"
 
   route {
     cidr_block = "0.0.0.0/0"
