@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: logging-test
+  labels:
+    run: logging-test
+spec:
+  ports:
+  - port: 5001
+    targetPort: 8090
+    protocol: TCP
+  selector:
+    run: logging-test
+  type: LoadBalancer
+

@@ -1,3 +1,4 @@
+    
 #
 # EKS Cluster Resources
 #  * IAM Role to allow EKS service to manage other AWS services
@@ -81,22 +82,8 @@ resource "aws_eks_cluster" "demo" {
   }
 
   provisioner "local-exec" {
-  command = "aws eks update-kubeconfig --name ${var.cluster-name}"
-}
-provisioner "local-exec" {
-  command = "kubectl apply -f config_map_aws_auth.yaml"
-}
-provisioner "local-exec" {
-  command = "kubectl apply -f takeon-ui-test.yaml"
-}
-
-provisioner "local-exec" {
-  command = "kubectl apply -f takeon-ui-test-svc.yaml"
-}
-
-provisioner "local-exec" {
-  command = "kubectl get services -o wide"
-}
+    command="./kubectlcommands.sh"
+  }
 
   depends_on = [
     "aws_iam_role_policy_attachment.demo-cluster-AmazonEKSClusterPolicy",
