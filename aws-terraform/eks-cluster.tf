@@ -57,12 +57,12 @@ resource "aws_security_group_rule" "take-on-cluster-ingress-node-https" {
   from_port                = 443
   protocol                 = "tcp"
   security_group_id        = "${aws_security_group.take-on-cluster.id}"
-  source_security_group_id = "${aws_security_group.take-on-cluster.id}"
+  source_security_group_id = "${aws_security_group.take-on.id}"
   to_port                  = 443
   type                     = "ingress"
 }
 
-resource "aws_eks_cluster" "demo" {
+resource "aws_eks_cluster" "take-on-cluster" {
   name     = "${var.cluster-name}"
   role_arn = "${aws_iam_role.take-on-cluster.arn}"
 

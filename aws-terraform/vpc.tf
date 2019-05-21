@@ -17,7 +17,7 @@ resource "aws_vpc" "demo" {
   }"
 }
 
-resource "aws_subnet" "demo" {
+resource "aws_subnet" "eks-subnet" {
   count = 2
 
   # availability_zone = "${data.aws_availability_zones.available.names[count.index]}"s
@@ -104,7 +104,7 @@ resource "aws_route_table" "route-test" {
   
 }
 
-resource "aws_route_table_association" "route-test-associate" {
-  subnet_id = "${aws_subnet.private-subnet.id}"
-  route_table_id = "${aws_route_table.route-test.id}"
-}
+# resource "aws_route_table_association" "route-test-associate" {
+#   subnet_id = "${aws_subnet.private-subnet.id}"
+#   route_table_id = "${aws_route_table.route-test.id}"
+# }
