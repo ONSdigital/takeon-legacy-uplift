@@ -81,9 +81,9 @@ resource "aws_eks_cluster" "demo" {
     subnet_ids         = ["${aws_subnet.demo.*.id}"]
   }
 
-  provisioner "local-exec" {
-    command="./kubectlcommands.sh"
-  }
+  # provisioner "local-exec" {
+  #   command="./kubectlcommands.sh"
+  # }
 
   depends_on = [
     "aws_iam_role_policy_attachment.demo-cluster-AmazonEKSClusterPolicy",
