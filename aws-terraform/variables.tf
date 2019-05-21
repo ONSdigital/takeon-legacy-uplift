@@ -28,11 +28,11 @@ variable "takeon_public_subnet"{
 }
 
 variable "takeon_private_subnet"{
-	default	= "10.0.1.0/24"
+	default	= "10.0.10.0/24"
 }
 
 variable "takeon_private_subnet_backup"{
-	default	= "10.0.2.0/24"
+	default	= "10.0.11.0/24"
 }
 
 variable "vpn_dns" {
@@ -69,6 +69,14 @@ variable "master_node_min_instances"{
 }
 
 variable "master_node_max_instances" {
+	default = 3
+}
+
+variable "worker_node_min_instances"{
+	default = 1
+}
+
+variable "worker_node_max_instances" {
 	default = 3
 }
 
