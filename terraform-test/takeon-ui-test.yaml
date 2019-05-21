@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: takeon-ui-test
+  name: take-on-repo
 spec:
   selector:
     matchLabels:
-      run: takeon-ui-test
-  replicas: 3
+      run: take-on-repo
+  replicas: 1
   template:
     metadata:
       labels:
-        run: takeon-ui-test
+        run: take-on-repo
     spec:
       containers:
-      - name: takeon-ui-test
-        image: 014669633018.dkr.ecr.eu-west-2.amazonaws.com/takeon-ui-test
+      - name: take-on-repo
+        image: 014669633018.dkr.ecr.eu-west-2.amazonaws.com/take-on-repo
         ports:
         - containerPort: 5000
 
