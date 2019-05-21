@@ -24,12 +24,12 @@ resource "aws_iam_role" "take-on-cluster" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "take-on-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = "${aws_iam_role.take-on-cluster.name}"
 }
 
-resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSServicePolicy" {
+resource "aws_iam_role_policy_attachment" "take-on-cluster-AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
   role       = "${aws_iam_role.take-on-cluster.name}"
 }
@@ -72,7 +72,7 @@ resource "aws_eks_cluster" "demo" {
   }
 
   depends_on = [
-    "aws_iam_role_policy_attachment.demo-cluster-AmazonEKSClusterPolicy",
-    "aws_iam_role_policy_attachment.demo-cluster-AmazonEKSServicePolicy",
+    "aws_iam_role_policy_attachment.take-on-cluster-AmazonEKSClusterPolicy",
+    "aws_iam_role_policy_attachment.take-on-cluster-AmazonEKSServicePolicy",
   ]
 }
