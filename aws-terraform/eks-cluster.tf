@@ -5,8 +5,8 @@
 #  * EKS Cluster
 #
 
-resource "aws_iam_role" "demo-cluster" {
-  name = "terraform-eks-demo-cluster"
+resource "aws_iam_role" "take-on-cluster" {
+  name = "take-on-cluster"
 
   assume_role_policy = <<POLICY
 {
@@ -26,16 +26,16 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = "${aws_iam_role.demo-cluster.name}"
+  role       = "${aws_iam_role.take-on-cluster.name}"
 }
 
 resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-  role       = "${aws_iam_role.demo-cluster.name}"
+  role       = "${aws_iam_role.take-on-cluster.name}"
 }
 
-resource "aws_security_group" "demo-cluster" {
-  name        = "terraform-eks-demo-cluster"
+resource "aws_security_group" "take-on-cluster" {
+  name        = "take-on-cluster"
   description = "Cluster communication with worker nodes"
   vpc_id      = "${aws_vpc.Take-On-VPC.id}"
 
@@ -47,56 +47,29 @@ resource "aws_security_group" "demo-cluster" {
   }
 
   tags = {
-    Name = "terraform-eks-demo"
+    Name = "take-on-eks-cluster"
+    Team = "TakeOn"
   }
 }
 
-resource "aws_security_group_rule" "demo-cluster-ingress-node-https" {
+resource "aws_security_group_rule" "take-on-cluster-ingress-node-https" {
   description              = "Allow pods to communicate with the cluster API Server"
   from_port                = 443
   protocol                 = "tcp"
-  security_group_id        = "${aws_security_group.demo-cluster.id}"
-  source_security_group_id = "${aws_security_group.demo-node.id}"
+  security_group_id        = "${aws_security_group.take-on-cluster.id}"
+  source_security_group_id = "${aws_security_group.take-on-cluster.id}"
   to_port                  = 443
   type                     = "ingress"
 }
 
-# resource "aws_security_group_rule" "demo-cluster-ingress-workstation-https" {
-#   cidr_blocks       = ["${local.workstation-external-cidr}"]
-#   description       = "Allow workstation to communicate with the cluster API Server"
-#   from_port         = 443
-#   protocol          = "tcp"
-#   security_group_id = "${aws_security_group.demo-cluster.id}"
-#   to_port           = 443
-#   type              = "ingress"
-# }
-
 resource "aws_eks_cluster" "demo" {
   name     = "${var.cluster-name}"
-  role_arn = "${aws_iam_role.demo-cluster.arn}"
+  role_arn = "${aws_iam_role.take-on-cluster.arn}"
 
   vpc_config {
-    security_group_ids = ["${aws_security_group.demo-cluster.id}"]
+    security_group_ids = ["${aws_security_group.take-on-cluster.id}"]
     subnet_ids         = ["${aws_subnet.private-subnet.id}", "${aws_subnet.private-subnet-backup.id}"]
   }
-
-  provisioner "local-exec" {
-  command = "aws eks update-kubeconfig --name ${var.cluster-name}"
-}
-provisioner "local-exec" {
-  command = "kubectl apply -f config_map_aws_auth.yaml"
-}
-provisioner "local-exec" {
-  command = "kubectl apply -f takeon-ui-test.yaml"
-}
-
-provisioner "local-exec" {
-  command = "kubectl apply -f takeon-ui-test-svc.yaml"
-}
-
-provisioner "local-exec" {
-  command = "kubectl get services -o wide"
-}
 
   depends_on = [
     "aws_iam_role_policy_attachment.demo-cluster-AmazonEKSClusterPolicy",
