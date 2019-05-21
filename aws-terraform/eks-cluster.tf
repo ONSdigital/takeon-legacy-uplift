@@ -68,7 +68,7 @@ resource "aws_eks_cluster" "take-on-cluster" {
 
   vpc_config {
     security_group_ids = ["${aws_security_group.take-on-cluster.id}"]
-    subnet_ids         = ["${aws_subnet.private-subnet.id}", "${aws_subnet.private-subnet-backup.id}"]
+    subnet_ids         = ["${aws_subnet.eks-subnet.*.id}"]
   }
 
   depends_on = [

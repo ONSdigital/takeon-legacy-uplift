@@ -26,10 +26,10 @@ resource "aws_ec2_client_vpn_endpoint" "main-endpoint" {
   }
 }
 
-resource "aws_ec2_client_vpn_network_association" "Private" {
-  client_vpn_endpoint_id = "${aws_ec2_client_vpn_endpoint.main-endpoint.id}"
-  subnet_id = "${aws_subnet.private-subnet.id}"
-}
+# resource "aws_ec2_client_vpn_network_association" "Private" {
+#   client_vpn_endpoint_id = "${aws_ec2_client_vpn_endpoint.main-endpoint.id}"
+#   subnet_id = "${aws_subnet.eks-subnet.id}"
+# }
 
 resource "aws_nat_gateway" "Take-On-Nat" {
     allocation_id = "${aws_eip.nat_eip.id}"

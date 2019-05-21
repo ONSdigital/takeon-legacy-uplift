@@ -18,15 +18,15 @@ resource "aws_vpc" "demo" {
 }
 
 resource "aws_subnet" "eks-subnet" {
-  count = 2
+   count = 2
 
   # availability_zone = "${data.aws_availability_zones.available.names[count.index]}"s
-  cidr_block        = "${var.takeon_eks_subnet}"
+  cidr_block        = "10.0.${count.index + 1}.0/24"
   vpc_id            = "${aws_vpc.Take-On-VPC.id}"
 
   tags = "${
     map(
-      "Name", "terraform-eks-demo-node",
+      "Name", "take-on-eks-subnet",
       "kubernetes.io/cluster/${var.cluster-name}", "shared",
     )
   }"
