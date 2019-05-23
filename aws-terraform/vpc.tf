@@ -6,21 +6,10 @@
 #  * Route Table
 #
 
-resource "aws_vpc" "demo" {
-  cidr_block = "10.0.0.0/16"
-
-  tags = "${
-    map(
-      "Name", "terraform-eks-demo-node",
-      "kubernetes.io/cluster/${var.cluster-name}", "shared",
-    )
-  }"
-}
-
 resource "aws_subnet" "eks-subnet" {
    count = 2
 
-  # availability_zone = "${data.aws_availability_zones.available.names[count.index]}"s
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   cidr_block        = "10.0.${count.index + 1}.0/24"
   vpc_id            = "${aws_vpc.Take-On-VPC.id}"
 
@@ -104,7 +93,9 @@ resource "aws_route_table" "route-test" {
   
 }
 
-# resource "aws_route_table_association" "route-test-associate" {
-#   subnet_id = "${aws_subnet.private-subnet.id}"
-#   route_table_id = "${aws_route_table.route-test.id}"
-# }
+#Was commented out, not sure if needed
+resource "aws_route_table_association" "route-test-associate" {
+	count = 2
+  subnet_id = "${aws_subnet.eks-subnet.*.id[count.index]}"
+  route_table_id = "${aws_route_table.route-test.id}"
+}

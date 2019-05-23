@@ -77,7 +77,7 @@ variable "worker_node_min_instances"{
 }
 
 variable "worker_node_max_instances" {
-	default = 3
+	default = 2
 }
 
 variable "pod_min_instances" {
