@@ -22,7 +22,6 @@ period = input("period: ")
 
 month = period[4:]
 year = period[:4]
-#response_list = ["Yes", "No"]
 
 
 def create_file_paths(selection_location, output_location):
@@ -55,7 +54,6 @@ class ResponseData:
             self.refs.append(row.split(':')[0])
 
     def generate_response_data(self):
-#        self.resp_list = self.response_list
         for ref in self.refs:
             self.data1 = {i: str(random.randint(1, 2)) for i in self.q_codes1[self.survey]}
             data2 = {i: fake.date(pattern='%Y-%m-%d') for i in self.q_codes2[self.survey]}
