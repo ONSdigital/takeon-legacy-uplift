@@ -37,7 +37,7 @@ class ResponseData:
         self.q_codes1 = {'019': [678, 679]}
         self.q_codes2 = {'019': [11, 12]}
         self.q_codes3 = {'019': [681, 688, 689, 695, 696, 703, 704, 707, 708, 709, 710, 711, 712, 714, 715, 692, 693]}
-        self.q_codes4 = {'019': [146]}
+        self.q_codes4 = {'019': ['146a']}
         self.refs = []
         self.data = []
         self.output = file_dict["response"]
