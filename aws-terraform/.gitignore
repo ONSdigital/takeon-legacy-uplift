@@ -1,0 +1,6 @@
+.git/
+.terraform/
+*tfstate*
+config.tf
+*.pdf
+.*.swp
