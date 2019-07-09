@@ -12,6 +12,7 @@ Period: 'eg. 202003'
 
 import json
 import random
+from argparse import ArgumentParser
 from faker import Faker
 
 fake = Faker('en_GB')
@@ -22,7 +23,6 @@ period = input("period: ")
 
 month = period[4:]
 year = period[:4]
-
 
 def create_file_paths(selection_location, output_location):
     return {"selection": selection_location, "response": output_location}
@@ -42,6 +42,14 @@ class ResponseData:
         self.data = []
         self.output = file_dict["response"]
         self.period = period
+
+        self.data1 = {i: str(random.randint(1, 2)) for i in self.q_codes1[self.survey]}
+        data2 = {i: fake.date(pattern='%Y-%m-%d') for i in self.q_codes2[self.survey]}
+        data3 = {i: str(random.randrange(0, 9999999999)) for i in self.q_codes3[self.survey]}
+        data4 = {i: str(random.randint(1, 2)) for i in self.q_codes4[self.survey]}
+        self.data1.update(data2)
+        self.data1.update(data3)
+        self.data1.update(data4)
 
     def get_selection_list(self):
         with open(self.file, 'r') as selection_file:

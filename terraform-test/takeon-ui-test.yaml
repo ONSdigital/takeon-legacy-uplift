@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: take-on-repo
+spec:
+  selector:
+    matchLabels:
+      run: take-on-repo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: take-on-repo
+    spec:
+      containers:
+      - name: take-on-repo
+        image: 014669633018.dkr.ecr.eu-west-2.amazonaws.com/take-on-repo
+        ports:
+        - containerPort: 5000
+

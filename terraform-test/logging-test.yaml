@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-test
+spec:
+  selector:
+    matchLabels:
+      run: logging-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: logging-test
+    spec:
+      containers:
+      - name: logging-test
+        image: 014669633018.dkr.ecr.eu-west-2.amazonaws.com/takeon-pl-test:latest
+        ports:
+        - containerPort: 5001
+
